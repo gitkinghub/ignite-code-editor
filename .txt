@@ -1,0 +1,1 @@
+react router navigation is configured using this package: react-router-dom
