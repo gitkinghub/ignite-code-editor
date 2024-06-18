@@ -3,7 +3,14 @@ import { UserAuthInput } from "../components";
 import { FaEnvelope, FaGithub } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { MdLock } from "react-icons/md";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { signINWithGitHub, signINWithGoogle } from "../utils/helpers";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
+} from "firebase/auth";
+import { auth } from "../config/firebase.config";
+import { fadeInOut } from "../animations";
 
 // the signup screen
 // remember that its route is inside the home screen. i.e /home/signUp
@@ -14,6 +21,50 @@ const SignUp = () => {
   const [getEmailValidationStatus, setGetEmailValidationStatus] =
     useState(false);
   const [isLogin, setIsLogin] = useState(false);
+  const [alert, setAlert] = useState(false);
+  const [alertMsg, setAlertMsg] = useState("");
+
+  // user sign up with email and password
+  const createNewUser = async () => {
+    if (getEmailValidationStatus) {
+      await createUserWithEmailAndPassword(auth, email, password)
+        .then((userCred) => {
+          if (userCred) {
+            console.log(userCred);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
+  // user login with email and password
+  const loginWithEmailPassword = async () => {
+    if (getEmailValidationStatus) {
+      await signInWithEmailAndPassword(auth, email, password)
+        .then((userCred) => {
+          if (userCred) {
+            console.log(userCred);
+          }
+        })
+        .catch((err) => {
+          console.log(err.message);
+          if (err.message.includes("invalid-credential")) {
+            setAlert(true);
+            setAlertMsg("Password or Email do not match");
+          } else if (err.message.includes("invalid-credential")) {
+            setAlert(true);
+            setAlertMsg("Password or Email do not match");
+          } else {
+            setAlert(true);
+            setAlertMsg("Temporary disabled due to many failed logins");
+          }
+
+          setInterval(() => {
+            setAlert(false);
+          }, 4000);
+        });
+    }
+  };
 
   return (
     <div className="w-full py-6">
@@ -41,9 +92,24 @@ const SignUp = () => {
             setStateFunction={setPassword}
             Icon={MdLock}
           />
+
+          {/* alert section */}
+          <AnimatePresence>
+            {alert && (
+              <motion.p
+                key={"AlertMessage"}
+                {...fadeInOut}
+                className="text-red-500"
+              >
+                {alertMsg}
+              </motion.p>
+            )}
+          </AnimatePresence>
+
           {/* sign up button */}
           {!isLogin ? (
             <motion.div
+              onClick={createNewUser}
               whileTap={{ scale: 0.9 }}
               className="flex items-center justify-center w-full py-3 rounded-xl hover:bg-emerald-400 cursor-pointer bg-emerald-500"
             >
@@ -51,6 +117,7 @@ const SignUp = () => {
             </motion.div>
           ) : (
             <motion.div
+              onClick={loginWithEmailPassword}
               whileTap={{ scale: 0.9 }}
               className="flex items-center justify-center w-full py-3 rounded-xl hover:bg-emerald-400 cursor-pointer bg-emerald-500"
             >
@@ -90,6 +157,7 @@ const SignUp = () => {
 
           {/* sign in with google */}
           <motion.div
+            onClick={signINWithGoogle}
             className="flex items-center justify-center gap-3 bg-[rgba(256,256,256,0.2)] backdrop-blur-md w-full py-3 rounded-xl hover:bg-[rgba(256,256,256,0.4)] cursor-pointer"
             whileTap={{ scale: 0.9 }}
           >
@@ -106,6 +174,7 @@ const SignUp = () => {
 
           {/* sign in with github */}
           <motion.div
+            onClick={signINWithGitHub}
             className="flex items-center justify-center gap-3 bg-[rgba(256,256,256,0.2)] backdrop-blur-md w-full py-3 rounded-xl hover:bg-[rgba(256,256,256,0.4)] cursor-pointer"
             whileTap={{ scale: 0.9 }}
           >

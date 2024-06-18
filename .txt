@@ -1,1 +1,6 @@
 react router navigation is configured using this package: react-router-dom
+i have used firestore db to store user details when they login
+i have used firebase to authenticate users with listed types
+next is to push the user's data into the firestore collection and redux database
+framer motion has been used for animation
+i have used code-mirror for editing code in the project

@@ -5,12 +5,13 @@ import { FaSearchengin } from "react-icons/fa6";
 import { motion } from "framer-motion";
 import { Link, Route, Routes } from "react-router-dom";
 import { Logo } from "../assets";
-import {Projects, SignUp} from "../container";
-
+import { Projects, SignUp } from "../container";
+import { useSelector } from "react-redux";
+import UserProfileDetails from "./../components/UserProfileDetails";
 
 const Home = () => {
   const [isSideMenu, setIsSideMenu] = useState(false);
-  const [user, setUser] = useState();
+  const user = useSelector((state) => state.user?.user); //get the state from redux
   return (
     // create two divisions for the home section
     <>
@@ -99,7 +100,7 @@ const Home = () => {
               </Link>
             </motion.div>
           )}
-          {user && <div></div>}
+          {user && <UserProfileDetails />}
         </div>
 
         {/* the middle section below the top */}
