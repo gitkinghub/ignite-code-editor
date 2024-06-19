@@ -33,13 +33,10 @@ const Home = () => {
         {/* logo, start coding btn, home nav */}
         <div className="overflow-hidden w-full flex-col gap-4">
           {/* logo -rem to change the logo- */}
-          <Link to={"/home"} className="mb-8">
-            <img
-              src={Logo}
-              alt="Logo"
-              className="object-contain w-62 h-19 mb-5"
-            />
-            {/* <span className="text-gray-400 pl-2">Genio Script</span> */}
+          <Link to={"/home"} className="">
+            <div className="text-white text-center text-4xl font-Pacifico mb-8">
+              GenioScript
+            </div>
           </Link>
 
           {/* start coding button */}
