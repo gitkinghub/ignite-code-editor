@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# Genioscript is on online fronted code editor which is seamless and does does not require installation. 
+
+## Instructions to run the App Are Below:
+
+### Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -68,3 +72,14 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Loading Screen
+![image](https://github.com/gitkinghub/ignite-code-editor/assets/93211264/3f15d4a9-87c2-4442-a688-201c5b53aeb2)
+
+### Home Screen
+![image](https://github.com/gitkinghub/ignite-code-editor/assets/93211264/f338c271-05c8-4c65-8b66-8f21085ce1bd)
+
+
+### Code Editor Screen
+![image](https://github.com/gitkinghub/ignite-code-editor/assets/93211264/7e5a9cd0-e381-431c-b3f9-fcdc0cc310a9)
+
